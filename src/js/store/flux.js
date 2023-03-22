@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			favourites: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -37,7 +38,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+			insertFav: (data) => {
+				setStore({
+				  favourites: getStore().favourites.concat(data),
+				});
+			  },
 		}
 	};
 };
