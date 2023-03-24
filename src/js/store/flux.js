@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			favourites: [],
+			favorites: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -39,11 +39,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			insertFav: (data) => {
-				setStore({
-				  favourites: getStore().favourites.concat(data),
+			addFavorite: (name, url) => {
+				const store = getStore();
+				let count = 0;
+				store.favorites.map(each => {
+					if (each.name == name) {
+						count = 1;
+					}
 				});
-			  },
+				if (count == 0) {
+					setStore({
+						favorites: [
+							...store.favorites,
+							{
+								name: name,
+								url: url
+							}
+						]
+					});
+				}
+			},
+			deleteFavorite: id => {
+				const store = getStore();
+				const newFavorites = store.favorites.filter((item, i) => i !== id);
+				setStore({ favorites: newFavorites });
+			}
 		}
 	};
 };

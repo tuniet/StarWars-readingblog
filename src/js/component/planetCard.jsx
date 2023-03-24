@@ -8,17 +8,11 @@ export const PlanetCard = (props) => {
 	const { store, actions } = useContext(Context);
 
     const navigate = useNavigate();
-
+    const url = "/planets/" + props.i
     const handleclick = (i) => {
-        navigate(`/planets/${i}`)
+        navigate(url)
     };
-    const addToFav = (i) => {
-        fav = {
-            url: "/planets/" + {i},
-            name: planet.name
-        }
-        actions.insertFav(fav)
-    };
+      
 	return(
 		<div className="card" style={{width: 18 + "rem"}}>
             <img src={image} className="card-img-top" alt=""></img>
@@ -29,7 +23,7 @@ export const PlanetCard = (props) => {
                 <p>Population: {planet.population}</p>
                 <div className="d-flex">
                     <button className="btn btn-primary" onClick={(e) => handleclick(props.i)}>Go to page!</button>
-                    <button className="btn btn-warning" onClick={(e) => addToFav(props.i)}>Add to Favourites</button>
+                    <button className="btn btn-warning" onClick={(e) => actions.addFavorite(planet.name, url)}>Add to Favourites</button>
                 </div> 
             </div>
         </div>
